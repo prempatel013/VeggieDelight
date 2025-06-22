@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Menu - VeggieDelight</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-leaf"></i>
+                    <span>VeggieDelight</span>
+                </a>
+            </div>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="menu.html" class="nav-link active">Menu</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                <li><a href="login.html" class="nav-link">Login</a></li>
+                <li><a href="register.html" class="nav-link btn-register">Register</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <a href="cart.html" class="nav-cart">
+                    <i class="fas fa-shopping-cart" id="cart-icon"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </a>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Menu Hero Section -->
+    <section class="menu-hero">
+        <div class="container">
+            <div class="menu-hero-content">
+                <h1>Our Complete Menu</h1>
+                <p>Explore our extensive collection of authentic vegetarian Indian and Gujarati dishes</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu-section">
+        <div class="container">
+            <!-- Search and Filter Bar -->
+            <div class="menu-controls">
+                <div class="search-container">
+                    <input type="text" id="menu-search" placeholder="Search for dishes..." class="search-input">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+                
+                <div class="category-filters">
+                    <button class="filter-btn active" data-category="all">All</button>
+                    <button class="filter-btn" data-category="Gujarati Thali">Gujarati Thali</button>
+                    <button class="filter-btn" data-category="Curries & Sabzis">Curries & Sabzis</button>
+                    <button class="filter-btn" data-category="Breads">Breads</button>
+                    <button class="filter-btn" data-category="Street Food">Street Food</button>
+                    <button class="filter-btn" data-category="Sweets">Sweets</button>
+                    <button class="filter-btn" data-category="Beverages">Beverages</button>
+                </div>
+            </div>
+            
+            <!-- Menu Grid -->
+            <div class="menu-grid" id="menu-grid">
+                <!-- All menu items will be loaded dynamically -->
+            </div>
+            
+            <!-- Load More Button -->
+            <div class="menu-actions" id="load-more-container" style="display: none;">
+                <button class="btn btn-secondary btn-large" id="load-more-btn">
+                    <i class="fas fa-plus"></i>
+                    Load More Items
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>VeggieDelight</h3>
+                    <p>Authentic vegetarian Indian and Gujarati food, delivered with love.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="#gujarati-thali">Gujarati Thali</a></li>
+                        <li><a href="#curries">Curries & Sabzis</a></li>
+                        <li><a href="#breads">Breads</a></li>
+                        <li><a href="#street-food">Street Food</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 VeggieDelight. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/menu.js?v=1.1"></script>
+</body>
+</html> 

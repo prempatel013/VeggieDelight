@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - VeggieDelight</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .settings-page {
+            padding-top: 100px;
+            min-height: 100vh;
+            background: #f8f9fa;
+        }
+        
+        .settings-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .settings-header {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        
+        .settings-header h1 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .settings-header p {
+            color: var(--text-secondary);
+        }
+        
+        .settings-sections {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .settings-section {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e9ecef;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border: 1px solid #e9ecef;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+        
+        .checkbox-item:hover {
+            background: #f8f9fa;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-color);
+        }
+        
+        .checkbox-content {
+            flex: 1;
+        }
+        
+        .checkbox-title {
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+        
+        .checkbox-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .btn-save {
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .btn-save:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .danger-zone {
+            border: 1px solid var(--error);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            background: #fff5f5;
+        }
+        
+        .danger-zone .section-title {
+            color: var(--error);
+        }
+        
+        .btn-danger {
+            background: var(--error);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .btn-danger:hover {
+            background: #c53030;
+            transform: translateY(-2px);
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .password-toggle:hover {
+            color: var(--text-primary);
+        }
+        
+        .input-group {
+            position: relative;
+        }
+        
+        @media (max-width: 768px) {
+            .settings-container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-leaf"></i>
+                    <span>VeggieDelight</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="menu.html" class="nav-link">Menu</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="cart.html" class="nav-cart">
+                    <i class="fas fa-shopping-cart" id="cart-icon"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </a>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="settings-page">
+        <div class="settings-container">
+            <!-- Settings Header -->
+            <div class="settings-header">
+                <h1>Account Settings</h1>
+                <p>Manage your account preferences and security</p>
+            </div>
+
+            <!-- Settings Sections -->
+            <div class="settings-sections">
+                <!-- Password Change -->
+                <div class="settings-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-lock"></i>
+                        Change Password
+                    </h2>
+                    <form id="password-form">
+                        <div class="form-group">
+                            <label class="form-label" for="current-password">Current Password</label>
+                            <div class="input-group">
+                                <input type="password" id="current-password" name="current_password" class="form-input" required>
+                                <button type="button" class="password-toggle" onclick="togglePassword('current-password')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="new-password">New Password</label>
+                            <div class="input-group">
+                                <input type="password" id="new-password" name="new_password" class="form-input" required>
+                                <button type="button" class="password-toggle" onclick="togglePassword('new-password')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="confirm-password">Confirm New Password</label>
+                            <div class="input-group">
+                                <input type="password" id="confirm-password" name="confirm_password" class="form-input" required>
+                                <button type="button" class="password-toggle" onclick="togglePassword('confirm-password')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-save">Update Password</button>
+                    </form>
+                </div>
+
+                <!-- Notification Preferences -->
+                <div class="settings-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-bell"></i>
+                        Notification Preferences
+                    </h2>
+                    <form id="notifications-form">
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="email-notifications" name="email_notifications">
+                                <div class="checkbox-content">
+                                    <div class="checkbox-title">Email Notifications</div>
+                                    <div class="checkbox-description">Receive order updates and promotions via email</div>
+                                </div>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="sms-notifications" name="sms_notifications">
+                                <div class="checkbox-content">
+                                    <div class="checkbox-title">SMS Notifications</div>
+                                    <div class="checkbox-description">Get delivery updates via text message</div>
+                                </div>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="push-notifications" name="push_notifications">
+                                <div class="checkbox-content">
+                                    <div class="checkbox-title">Push Notifications</div>
+                                    <div class="checkbox-description">Receive browser notifications for order updates</div>
+                                </div>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="newsletter" name="newsletter">
+                                <div class="checkbox-content">
+                                    <div class="checkbox-title">Newsletter</div>
+                                    <div class="checkbox-description">Subscribe to our weekly newsletter for new dishes and offers</div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-save">Save Preferences</button>
+                    </form>
+                </div>
+
+                <!-- Privacy Settings -->
+                <div class="settings-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-shield-alt"></i>
+                        Privacy Settings
+                    </h2>
+                    <form id="privacy-form">
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="profile-visible" name="profile_visible">
+                                <div class="checkbox-content">
+                                    <div class="checkbox-title">Public Profile</div>
+                                    <div class="checkbox-description">Allow other users to see your reviews and ratings</div>
+                                </div>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="order-history" name="order_history">
+                                <div class="checkbox-content">
+                                    <div class="checkbox-title">Order History</div>
+                                    <div class="checkbox-description">Keep your order history for personalized recommendations</div>
+                                </div>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="analytics" name="analytics">
+                                <div class="checkbox-content">
+                                    <div class="checkbox-title">Analytics</div>
+                                    <div class="checkbox-description">Help us improve by sharing anonymous usage data</div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-save">Save Privacy Settings</button>
+                    </form>
+                </div>
+
+                <!-- Danger Zone -->
+                <div class="settings-section danger-zone">
+                    <h2 class="section-title">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Danger Zone
+                    </h2>
+                    <p style="margin-bottom: 1rem; color: var(--text-secondary);">
+                        These actions cannot be undone. Please proceed with caution.
+                    </p>
+                    <button class="btn-danger" onclick="deleteAccount()">
+                        <i class="fas fa-trash"></i>
+                        Delete Account
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load current settings
+            loadSettings();
+            
+            // Handle form submissions
+            document.getElementById('password-form').addEventListener('submit', handlePasswordChange);
+            document.getElementById('notifications-form').addEventListener('submit', handleNotificationsUpdate);
+            document.getElementById('privacy-form').addEventListener('submit', handlePrivacyUpdate);
+        });
+
+        function loadSettings() {
+            fetch('../backend/api/get_settings.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const settings = data.settings;
+                        
+                        // Set notification preferences
+                        document.getElementById('email-notifications').checked = settings.email_notifications || false;
+                        document.getElementById('sms-notifications').checked = settings.sms_notifications || false;
+                        document.getElementById('push-notifications').checked = settings.push_notifications || false;
+                        document.getElementById('newsletter').checked = settings.newsletter || false;
+                        
+                        // Set privacy settings
+                        document.getElementById('profile-visible').checked = settings.profile_visible || false;
+                        document.getElementById('order-history').checked = settings.order_history || false;
+                        document.getElementById('analytics').checked = settings.analytics || false;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading settings:', error);
+                });
+        }
+
+        function handlePasswordChange(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const newPassword = formData.get('new_password');
+            const confirmPassword = formData.get('confirm_password');
+            
+            if (newPassword !== confirmPassword) {
+                showToast('New passwords do not match', 'error');
+                return;
+            }
+            
+            if (newPassword.length < 6) {
+                showToast('Password must be at least 6 characters long', 'error');
+                return;
+            }
+            
+            fetch('../backend/api/change_password.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showToast('Password updated successfully!', 'success');
+                    e.target.reset();
+                } else {
+                    showToast(data.message || 'Failed to update password', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showToast('Network error. Please try again.', 'error');
+            });
+        }
+
+        function handleNotificationsUpdate(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            
+            fetch('../backend/api/update_notifications.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showToast('Notification preferences updated!', 'success');
+                } else {
+                    showToast(data.message || 'Failed to update preferences', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showToast('Network error. Please try again.', 'error');
+            });
+        }
+
+        function handlePrivacyUpdate(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            
+            fetch('../backend/api/update_privacy.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showToast('Privacy settings updated!', 'success');
+                } else {
+                    showToast(data.message || 'Failed to update privacy settings', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showToast('Network error. Please try again.', 'error');
+            });
+        }
+
+        function deleteAccount() {
+            if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                const password = prompt('Please enter your password to confirm:');
+                if (password) {
+                    const formData = new FormData();
+                    formData.append('password', password);
+                    
+                    fetch('../backend/api/delete_account.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            showToast('Account deleted successfully', 'success');
+                            setTimeout(() => {
+                                window.location.href = '../backend/logout.php';
+                            }, 2000);
+                        } else {
+                            showToast(data.message || 'Failed to delete account', 'error');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        showToast('Network error. Please try again.', 'error');
+                    });
+                }
+            }
+        }
+
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const toggle = input.parentElement.querySelector('.password-toggle i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                toggle.className = 'fas fa-eye-slash';
+            } else {
+                input.type = 'password';
+                toggle.className = 'fas fa-eye';
+            }
+        }
+
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast ${type}`;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html> 

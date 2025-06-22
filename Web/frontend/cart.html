@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - VeggieDelight</title>
+    <link rel="stylesheet" href="css/style.css?v=1.3">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-leaf"></i>
+                    <span>VeggieDelight</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <!-- Links will be dynamically populated -->
+            </ul>
+            <div class="nav-actions">
+                <a href="cart.html" class="nav-cart">
+                    <i class="fas fa-shopping-cart" id="cart-icon"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </a>
+                 <div class="profile-icon" id="profile-icon-container" style="display: none;">
+                    <!-- Profile icon here -->
+                </div>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Cart Page -->
+    <main class="main">
+        <section class="cart-section">
+            <div class="container">
+                <div class="cart-header">
+                    <h1 class="cart-title">Your Shopping Cart</h1>
+                    <p class="cart-subtitle">Review your items and proceed to checkout.</p>
+                </div>
+
+                <div id="cart-state-container">
+                    <!-- Loading State -->
+                    <div id="cart-loading" class="cart-state">
+                        <div class="loading-spinner"></div>
+                        <p>Loading your cart...</p>
+                    </div>
+
+                    <!-- Empty Cart State -->
+                    <div id="empty-cart" class="cart-state" style="display: none;">
+                        <div class="empty-cart-icon"><i class="fas fa-shopping-bag"></i></div>
+                        <h2>Your cart is empty</h2>
+                        <p>Looks like you haven't added any items yet. Explore our menu to find something delicious!</p>
+                        <a href="menu.html" class="btn btn-primary"><i class="fas fa-utensils"></i> Browse Menu</a>
+                    </div>
+                    
+                    <!-- Cart Content -->
+                    <div class="cart-content" id="cart-content-wrapper" style="display: none;">
+                        <div class="cart-items" id="cart-items">
+                            <!-- JS will render items here -->
+                        </div>
+                        <div class="cart-summary" id="cart-summary">
+                            <h3>Order Summary</h3>
+                            <div class="summary-item">
+                                <span>Subtotal</span>
+                                <span id="cart-subtotal">₹0.00</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Tax (8%)</span>
+                                <span id="cart-tax">₹0.00</span>
+                            </div>
+                            <div class="summary-total">
+                                <span>Total</span>
+                                <strong id="cart-total">₹0.00</strong>
+                            </div>
+                             <div class="cart-actions">
+                                <button class="btn btn-primary" id="checkout-btn">
+                                    <i class="fas fa-credit-card"></i> Proceed to Checkout
+                                </button>
+                                <button class="btn btn-secondary" id="clear-cart-btn">
+                                    <i class="fas fa-trash"></i> Clear Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Scripts -->
+    <script src="js/main.js?v=1.2"></script>
+    <script src="js/cart.js?v=1.2"></script>
+</body>
+</html> 

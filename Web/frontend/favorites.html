@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Favorites - VeggieDelight</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .favorites-page {
+            padding-top: 100px;
+            min-height: 100vh;
+            background: #f8f9fa;
+        }
+        
+        .favorites-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .favorites-header {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        
+        .favorites-header h1 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .favorites-header p {
+            color: var(--text-secondary);
+        }
+        
+        .favorites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .favorite-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .favorite-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .favorite-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .favorite-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .favorite-card:hover .favorite-image img {
+            transform: scale(1.1);
+        }
+        
+        .favorite-actions {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .favorite-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            color: var(--error);
+        }
+        
+        .favorite-btn:hover {
+            background: var(--white);
+            transform: scale(1.1);
+        }
+        
+        .favorite-content {
+            padding: 1.5rem;
+        }
+        
+        .favorite-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .favorite-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        
+        .favorite-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .favorite-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .favorite-actions-bottom {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .btn-favorite {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background: var(--secondary-color);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid #e9ecef;
+        }
+        
+        .btn-secondary:hover {
+            background: #f8f9fa;
+        }
+        
+        .empty-favorites {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+        }
+        
+        .empty-favorites i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        .empty-favorites h3 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        @media (max-width: 768px) {
+            .favorites-container {
+                padding: 1rem;
+            }
+            
+            .favorites-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .favorite-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .favorite-actions-bottom {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-leaf"></i>
+                    <span>VeggieDelight</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="menu.html" class="nav-link">Menu</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="cart.html" class="nav-cart">
+                    <i class="fas fa-shopping-cart" id="cart-icon"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </a>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="favorites-page">
+        <div class="favorites-container">
+            <!-- Favorites Header -->
+            <div class="favorites-header">
+                <h1>My Favorites</h1>
+                <p>Your saved dishes for quick access</p>
+            </div>
+
+            <!-- Favorites Grid -->
+            <div id="favorites-grid" class="favorites-grid">
+                <!-- Favorites will be loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load favorites
+            loadFavorites();
+        });
+
+        function loadFavorites() {
+            const favoritesGrid = document.getElementById('favorites-grid');
+            
+            // Show loading state
+            favoritesGrid.innerHTML = '<div style="text-align: center; padding: 2rem; grid-column: 1 / -1;"><div class="loading"></div><p>Loading favorites...</p></div>';
+            
+            fetch('../backend/api/get_favorites.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        if (data.favorites.length === 0) {
+                            showEmptyFavorites();
+                        } else {
+                            displayFavorites(data.favorites);
+                        }
+                    } else {
+                        showToast('Failed to load favorites', 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading favorites:', error);
+                    showToast('Error loading favorites', 'error');
+                });
+        }
+
+        function displayFavorites(favorites) {
+            const favoritesGrid = document.getElementById('favorites-grid');
+            
+            favoritesGrid.innerHTML = favorites.map(item => {
+                const imagePath = item.image_path ? `../backend/uploads/${item.image_path}` : 'images/placeholder.jpg';
+                return `
+                    <div class="favorite-card" data-id="${item.id}">
+                        <div class="favorite-image">
+                            <img src="${imagePath}" alt="${item.title}" onerror="this.src='images/placeholder.jpg'">
+                            <div class="favorite-actions">
+                                <button class="favorite-btn" onclick="removeFavorite(${item.id})">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="favorite-content">
+                            <h3 class="favorite-title">${item.title}</h3>
+                            <p class="favorite-description">${item.description}</p>
+                            <div class="favorite-footer">
+                                <div class="favorite-price">$${parseFloat(item.price).toFixed(2)}</div>
+                                <div class="favorite-actions-bottom">
+                                    <a href="dish.html?id=${item.id}" class="btn-favorite btn-secondary">
+                                        <i class="fas fa-eye"></i>
+                                        View
+                                    </a>
+                                    <button class="btn-favorite btn-primary" onclick="addToCart(${item.id})">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function showEmptyFavorites() {
+            const favoritesGrid = document.getElementById('favorites-grid');
+            favoritesGrid.innerHTML = `
+                <div class="empty-favorites" style="grid-column: 1 / -1;">
+                    <i class="fas fa-heart"></i>
+                    <h3>No Favorites Yet</h3>
+                    <p>You haven't added any dishes to your favorites yet. Start exploring our menu!</p>
+                    <a href="menu.html" class="btn btn-primary" style="margin-top: 1rem;">
+                        <i class="fas fa-utensils"></i>
+                        Browse Menu
+                    </a>
+                </div>
+            `;
+        }
+
+        function removeFavorite(itemId) {
+            fetch('../backend/api/remove_favorite.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: JSON.stringify({ food_id: itemId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showToast('Removed from favorites', 'success');
+                    // Remove the card from DOM
+                    const card = document.querySelector(`[data-id="${itemId}"]`);
+                    if (card) {
+                        card.remove();
+                        
+                        // Check if no more favorites
+                        const remainingCards = document.querySelectorAll('.favorite-card');
+                        if (remainingCards.length === 0) {
+                            showEmptyFavorites();
+                        }
+                    }
+                } else {
+                    showToast(data.message || 'Failed to remove from favorites', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showToast('Network error. Please try again.', 'error');
+            });
+        }
+
+        function addToCart(itemId) {
+            const formData = new FormData();
+            formData.append('food_id', itemId);
+            formData.append('quantity', 1);
+            
+            fetch('../backend/cart_add.php', {
+                method: 'POST',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Update cart count in header
+                    updateCartCount(data.cart_count);
+                    showToast('Added to cart!', 'success');
+                } else {
+                    showToast(data.message || 'Failed to add to cart', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showToast('Network error. Please try again.', 'error');
+            });
+        }
+
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast ${type}`;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html> 

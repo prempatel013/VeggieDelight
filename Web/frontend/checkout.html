@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - VeggieDelight</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-leaf"></i>
+                    <span>VeggieDelight</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                 <li><a href="index.html" class="nav-link">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main">
+        <section class="checkout-section">
+            <div class="container">
+                <h1 class="section-title">Checkout</h1>
+                <div class="checkout-layout">
+                    <!-- Order Summary -->
+                    <div class="checkout-summary">
+                        <h2>Order Summary</h2>
+                        <div id="summary-items">
+                            <!-- JS will populate this -->
+                        </div>
+                        <div class="summary-total">
+                            <span>Subtotal</span>
+                            <span id="summary-subtotal">$0.00</span>
+                        </div>
+                        <div class="summary-total">
+                            <span>Tax (8%)</span>
+                            <span id="summary-tax">$0.00</span>
+                        </div>
+                        <div class="summary-total final-total">
+                            <span>Total</span>
+                            <strong id="summary-total">$0.00</strong>
+                        </div>
+                    </div>
+
+                    <!-- Delivery Information -->
+                    <div class="checkout-details">
+                        <h2>Delivery Information</h2>
+                        <form id="checkout-form">
+                            <div class="form-group">
+                                <label for="address" class="form-label">Delivery Address</label>
+                                <textarea id="address" name="address" class="form-input" rows="3" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" class="form-input" required>
+                            </div>
+                            <button type="submit" class="auth-btn" id="place-order-btn">
+                                <span class="btn-text">Place Order</span>
+                                <span class="btn-loading" style="display: none;">
+                                    <div class="loading"></div>
+                                    Placing Order...
+                                </span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="toast" class="toast"></div>
+    <script src="js/main.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const summaryItems = document.getElementById('summary-items');
+        const summarySubtotal = document.getElementById('summary-subtotal');
+        const summaryTax = document.getElementById('summary-tax');
+        const summaryTotal = document.getElementById('summary-total');
+        const addressInput = document.getElementById('address');
+        const phoneInput = document.getElementById('phone');
+
+        // Fetch user and cart data
+        function loadCheckoutData() {
+            fetch('../backend/api/get_cart.php', { headers: {'X-Requested-With': 'XMLHttpRequest'} })
+                .then(res => res.json())
+                .then(cartData => {
+                    if (cartData.success && cartData.cart.length > 0) {
+                        renderSummary(cartData);
+                    } else {
+                        showToast('Your cart is empty. Redirecting...', 'error');
+                        setTimeout(() => window.location.href = 'cart.html', 1500);
+                    }
+                });
+
+            fetch('../backend/api/get_user.php', { headers: {'X-Requested-With': 'XMLHttpRequest'} })
+                .then(res => res.json())
+                .then(userData => {
+                    if (userData.success) {
+                        addressInput.value = userData.user.address;
+                        phoneInput.value = userData.user.phone;
+                    }
+                });
+        }
+
+        function renderSummary(data) {
+            const usdToInrRate = 86.6;
+
+            summaryItems.innerHTML = data.cart.map(item => {
+                const itemPriceInr = (item.price * item.quantity) * usdToInrRate;
+                return `
+                <div class="summary-item">
+                    <span class="item-name">${item.quantity}x ${item.title}</span>
+                    <span class="item-price">₹${itemPriceInr.toFixed(2)}</span>
+                </div>
+            `}).join('');
+
+            const subtotal = data.total;
+            const tax = subtotal * 0.08;
+            const total = subtotal + tax;
+
+            const subtotalInr = subtotal * usdToInrRate;
+            const taxInr = tax * usdToInrRate;
+            const totalInr = total * usdToInrRate;
+
+            summarySubtotal.textContent = `₹${subtotalInr.toFixed(2)}`;
+            summaryTax.textContent = `₹${taxInr.toFixed(2)}`;
+            summaryTotal.textContent = `₹${totalInr.toFixed(2)}`;
+        }
+
+        // Handle Form Submission
+        document.getElementById('checkout-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const placeOrderBtn = document.getElementById('place-order-btn');
+            const btnText = placeOrderBtn.querySelector('.btn-text');
+            const btnLoading = placeOrderBtn.querySelector('.btn-loading');
+
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'flex';
+            placeOrderBtn.disabled = true;
+
+            const formData = new FormData(this);
+
+            fetch('../backend/api/place_order.php', {
+                method: 'POST',
+                headers: {'X-Requested-With': 'XMLHttpRequest'},
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = `order_success.html?order_id=${data.order_id}`;
+                } else {
+                    showToast(data.message || 'Checkout failed. Please try again.', 'error');
+                }
+            })
+            .catch(err => {
+                console.error('Checkout Error:', err);
+                showToast('An network error occurred. Please try again.', 'error');
+            })
+            .finally(() => {
+                btnText.style.display = 'block';
+                btnLoading.style.display = 'none';
+                placeOrderBtn.disabled = false;
+            });
+        });
+
+        loadCheckoutData();
+    });
+    </script>
+</body>
+</html> 

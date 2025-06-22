@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dish Details - VeggieDelight</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dish-detail.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-leaf"></i>
+                    <span>VeggieDelight</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="menu.html" class="nav-link">Menu</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                <li><a href="login.html" class="nav-link">Login</a></li>
+                <li><a href="register.html" class="nav-link btn-register">Register</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="cart.html" class="nav-cart">
+                    <i class="fas fa-shopping-cart" id="cart-icon"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </a>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="dish-main">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <div class="container">
+                <a href="index.html" class="breadcrumb-link">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="menu.html" class="breadcrumb-link">Menu</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current" id="breadcrumb-current">Dish</span>
+            </div>
+        </div>
+
+        <!-- Dish Details Section -->
+        <section class="dish-details-section">
+            <div class="container">
+                <div class="dish-details-grid" id="dish-details-container">
+                    <!-- Loading state -->
+                    <div class="loading-container">
+                        <div class="loading"></div>
+                        <p>Loading dish details...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Info Tabs -->
+        <section class="dish-info-section">
+            <div class="container">
+                <div class="info-tabs">
+                    <button class="tab-btn active" data-tab="ingredients">
+                        <i class="fas fa-list"></i> Ingredients
+                    </button>
+                    <button class="tab-btn" data-tab="nutrition">
+                        <i class="fas fa-chart-pie"></i> Nutrition
+                    </button>
+                    <button class="tab-btn" data-tab="reviews">
+                        <i class="fas fa-star"></i> Reviews
+                    </button>
+                </div>
+
+                <div class="tab-content">
+                    <!-- Ingredients Tab -->
+                    <div class="tab-pane active" id="ingredients-tab">
+                        <div class="ingredients-content">
+                            <h3>What's Inside</h3>
+                            <div class="ingredients-list" id="ingredients-list">
+                                <!-- Ingredients will be loaded here -->
+                            </div>
+                            <div class="allergy-info">
+                                <h4>Allergy Information</h4>
+                                <div class="allergy-tags">
+                                    <span class="allergy-tag dairy">Contains Dairy</span>
+                                    <span class="allergy-tag nuts">May Contain Nuts</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Nutrition Tab -->
+                    <div class="tab-pane" id="nutrition-tab">
+                        <div class="nutrition-content">
+                            <h3>Nutritional Information</h3>
+                            <div class="nutrition-grid">
+                                <div class="nutrition-item">
+                                    <span class="nutrition-label">Calories</span>
+                                    <span class="nutrition-value" id="calories">--</span>
+                                </div>
+                                <div class="nutrition-item">
+                                    <span class="nutrition-label">Protein</span>
+                                    <span class="nutrition-value" id="protein">--</span>
+                                </div>
+                                <div class="nutrition-item">
+                                    <span class="nutrition-label">Carbs</span>
+                                    <span class="nutrition-value" id="carbs">--</span>
+                                </div>
+                                <div class="nutrition-item">
+                                    <span class="nutrition-label">Fat</span>
+                                    <span class="nutrition-value" id="fat">--</span>
+                                </div>
+                                <div class="nutrition-item">
+                                    <span class="nutrition-label">Fiber</span>
+                                    <span class="nutrition-value" id="fiber">--</span>
+                                </div>
+                                <div class="nutrition-item">
+                                    <span class="nutrition-label">Sodium</span>
+                                    <span class="nutrition-value" id="sodium">--</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reviews Tab -->
+                    <div class="tab-pane" id="reviews-tab">
+                        <div class="reviews-content">
+                            <div class="reviews-header">
+                                <h3>Customer Reviews</h3>
+                                <div class="reviews-summary" id="reviews-summary">
+                                    <!-- Reviews summary will be loaded here -->
+                                </div>
+                            </div>
+                            
+                            <div class="reviews-list" id="reviews-list">
+                                <!-- Reviews will be loaded here -->
+                            </div>
+
+                            <!-- Review Form -->
+                            <div class="review-form-container" id="review-form-container">
+                                <h4>Leave a Review</h4>
+                                <form id="review-form">
+                                    <div class="form-group rating-group">
+                                        <label>Your Rating</label>
+                                        <div class="stars">
+                                            <i class="far fa-star" data-value="1"></i>
+                                            <i class="far fa-star" data-value="2"></i>
+                                            <i class="far fa-star" data-value="3"></i>
+                                            <i class="far fa-star" data-value="4"></i>
+                                            <i class="far fa-star" data-value="5"></i>
+                                        </div>
+                                        <input type="hidden" name="rating" id="rating-value" value="0">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="comment">Your Review</label>
+                                        <textarea name="comment" id="comment" rows="4" placeholder="Share your experience with this dish..." required></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                                </form>
+                            </div>
+                            
+                            <div id="review-login-prompt" class="review-login-prompt">
+                                <p><a href="login.html">Log in</a> to leave a review.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Similar Items Section -->
+        <section class="similar-items-section">
+            <div class="container">
+                <h2 class="section-title">You Might Also Like</h2>
+                <div class="similar-items-grid" id="similar-items-grid">
+                    <!-- Similar items will be loaded here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Sticky Add to Cart Bar (Mobile) -->
+    <div class="sticky-cart-bar" id="sticky-cart-bar">
+        <div class="container">
+            <div class="sticky-cart-content">
+                <div class="sticky-cart-info">
+                    <div class="sticky-cart-price" id="sticky-price">$0.00</div>
+                    <div class="sticky-cart-quantity">
+                        <button class="quantity-btn minus" onclick="updateQuantity(-1)">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <span class="quantity-value" id="sticky-quantity">1</span>
+                        <button class="quantity-btn plus" onclick="updateQuantity(1)">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <button class="btn btn-primary sticky-add-btn" onclick="addToCartFromSticky()">
+                    <i class="fas fa-shopping-cart"></i>
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Scripts -->
+    <script src="js/main.js?v=1.1"></script>
+    <script src="js/dish-detail.js?v=1.1"></script>
+</body>
+</html> 
