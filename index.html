@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VeggieDelight Project Launcher</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            text-align: center;
+        }
+        h1 {
+            color: #e85d04;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        h1 .fa-rocket {
+            transform: rotate(-15deg);
+        }
+        p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            text-align: left;
+        }
+        h2 {
+            font-size: 1.5rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+        .button {
+            display: inline-block;
+            background-color: #e85d04;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin: 0.5rem;
+        }
+        .button:hover {
+            background-color: #f48c06;
+        }
+        .button.secondary {
+            background-color: #6c757d;
+        }
+        .button.secondary:hover {
+            background-color: #5a6268;
+        }
+        .info {
+            margin-top: 3rem;
+            padding: 1.5rem;
+            background: #e9ecef;
+            border-radius: 10px;
+            text-align: left;
+        }
+        code {
+            background: #d4d4d4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-leaf"></i> VeggieDelight Project Launcher</h1>
+        <p>Use these links to access your application. This will ensure you are using the web server and avoid any network errors.</p>
+        
+        <div class="card">
+            <h2><i class="fas fa-desktop"></i> Frontend Application</h2>
+            <p>This is the customer-facing part of your website. Start here to use the app as a customer.</p>
+            <a href="/e-com/mmm-main/frontend/" class="button">Go to Frontend Home</a>
+            <a href="/e-com/mmm-main/frontend/login.html" class="button">Go to Login Page</a>
+        </div>
+
+        <div class="card">
+            <h2><i class="fas fa-cogs"></i> Backend & Admin</h2>
+            <p>Use these links to check the backend status or log in as an administrator.</p>
+            <a href="/e-com/mmm-main/backend/status.php" class="button secondary">Backend Status</a>
+            <a href="/e-com/mmm-main/backend/admin/login.php" class="button secondary">Admin Login</a>
+        </div>
+
+        <div class="info">
+            <h3>Why am I seeing this page?</h3>
+            <p>You were getting "CORS" and "Network" errors because you were opening website files directly from your computer (using <code>file:///...</code>). A web server (like Apache in XAMPP) is required to run the website and its PHP backend correctly. By using the links on this page, you ensure everything runs through the server.</p>
+        </div>
+    </div>
+</body>
+</html> 
